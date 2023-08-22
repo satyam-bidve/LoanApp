@@ -1,0 +1,21 @@
+﻿@model LoanApp_SanjaySir.Models.CustomerDetails
+
+         <h2>Loan Application Form</h2>
+            @{ /* Action Method name , Controller , type post  in controller pass the form data as object */}
+           @using (Html.BeginForm("AddCustomerForm","Customer",FormMethod.Post))
+            {
+              
+                  <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">Customer Name</label>
+                      @Html.TextBox("CustomerName", "",new{@class = "form-control", placeHolder = "Enter your Name"})
+                      
+                     
+                  </div>
+                 
+                  <button type="submit" class="btn btn-primary">Submit</button>
+              
+
+            }
+
+
+
