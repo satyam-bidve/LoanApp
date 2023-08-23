@@ -20,14 +20,14 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    
-<div class="form-group">
-    @Html.LabelFor(model => model.LoanType, htmlAttributes: new { @class = "control-label col-md-2" })
-    <div class="col-md-10">
-        @Html.DropDownListFor(x => x.LoanType, new SelectList(loanTypesDict.Values), "Choose Loan Type", new { @class = "form-control custom-select", style = "width: 100%" })
-        @Html.ValidationMessageFor(model => model.LoanType, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.LoanType, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(x => x.LoanType, new SelectList(loanTypesDict.Values), "Choose Loan Type", new { @class = "form-control custom-select", style = "width: 100%" })
+            @Html.ValidationMessageFor(model => model.LoanType, "", new { @class = "text-danger" })
+        </div>
     </div>
-</div>
 
     <div class="form-group">
         @Html.LabelFor(model => model.LoanAmountReq, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -37,7 +37,15 @@
         </div>
     </div>
 
-   
+    <div class="form-group">
+        @Html.LabelFor(model => model.LoanTenure, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.LoanTenure, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.LoanAmountReq, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
 
     <div class="form-group m-4">
         <div class="col-md-offset-2 col-md-10">

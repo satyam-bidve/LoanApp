@@ -8,7 +8,7 @@ namespace LoanApp_SanjaySir.Models
 {
     public class LoanDetails
     {
-        public int LoanCode { get; set; }
+        public String LoanCode { get; set; }
 
         [DisplayName("Loan Type :")]
         public string LoanType { get; set; }
@@ -16,11 +16,11 @@ namespace LoanApp_SanjaySir.Models
         [DisplayName("Loan Amount Required :")]
         public int LoanAmountReq { get; set; }
 
-        public int LoanAmountSanc { get; set; }
+        
 
         public bool LoanStatus { get; set; }
 
-        public int RateOfInterest { get; set; }
+        public float RateOfInterest { get; set; }
         public int LoanTenure { get; set; }
 
         public int EMI { get; set; }
