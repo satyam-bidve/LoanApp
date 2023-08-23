@@ -15,10 +15,21 @@ namespace LoanApp_SanjaySir.Controllers
             return View();
         }
 
-        public void AddCustomerForm(CustomerDetails customer)
+        public void GetCustomerForm(CustomerDetails customer)
         {
             // Data Recived
             Console.WriteLine(customer.CustomerName);
         }
+
+        public void GetLoanAppForm(LoanDetails loan)
+        {
+            Console.WriteLine(loan.LoanType);
+        }
+
+        public void GetDocForm(DocDetails doc)
+        {
+            Console.WriteLine(doc.DocumentName);
+        }
+
     }
 }

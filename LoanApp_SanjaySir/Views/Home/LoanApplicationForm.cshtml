@@ -7,7 +7,7 @@
 
 <h2>LoanApplicationForm</h2>
 
-@using (Html.BeginForm("AddCustomerForm", "Customer", FormMethod.Post)) 
+@using (Html.BeginForm("GetCustomerForm", "Customer", FormMethod.Post)) 
 {
     @Html.AntiForgeryToken()
     
@@ -15,21 +15,9 @@
     <h4>CustomerDetails</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.CustCode, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.CustCode, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.CustCode, "", new { @class = "text-danger" })
-        </div>
-    </div>
+    
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.ApplicationNumber, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.ApplicationNumber, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.ApplicationNumber, "", new { @class = "text-danger" })
-        </div>
-    </div>
+    
 
     <div class="form-group">
         @Html.LabelFor(model => model.CustomerName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -66,7 +54,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(x => x.Gender, new SelectList(GenderList), "Select Your Gender")
+            @Html.DropDownListFor(x => x.Gender, new SelectList(GenderList), "Select Your Gender", new { @class = "form-control custom-select", style = "width: 100%" })
             @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
         </div>
     </div>

@@ -2,11 +2,16 @@
 
 @{
     ViewBag.Title = "LoanAppForm";
+    Dictionary<string, string> loanTypesDict = new Dictionary<string, string>();
+    loanTypesDict.Add("L01", "Vehicle Loan");
+    loanTypesDict.Add("L02", "Personal Loan");
+    loanTypesDict.Add("L03", "Gold Loan");
+
 }
 
 <h2>LoanAppForm</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("GetLoanAppForm", "Customer", FormMethod.Post)) 
 {
     @Html.AntiForgeryToken()
     
@@ -14,21 +19,15 @@
     <h4>LoanDetails</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.LoanCode, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.LoanCode, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.LoanCode, "", new { @class = "text-danger" })
-        </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.LoanType, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.LoanType, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.LoanType, "", new { @class = "text-danger" })
-        </div>
+    
+<div class="form-group">
+    @Html.LabelFor(model => model.LoanType, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.DropDownListFor(x => x.LoanType, new SelectList(loanTypesDict.Values), "Choose Loan Type", new { @class = "form-control custom-select", style = "width: 100%" })
+        @Html.ValidationMessageFor(model => model.LoanType, "", new { @class = "text-danger" })
     </div>
+</div>
 
     <div class="form-group">
         @Html.LabelFor(model => model.LoanAmountReq, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -38,47 +37,7 @@
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.LoanAmountSanc, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.LoanAmountSanc, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.LoanAmountSanc, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.LoanStatus, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="checkbox">
-                @Html.EditorFor(model => model.LoanStatus)
-                @Html.ValidationMessageFor(model => model.LoanStatus, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.RateOfInterest, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.RateOfInterest, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.RateOfInterest, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.LoanTenure, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.LoanTenure, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.LoanTenure, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.EMI, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.EMI, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.EMI, "", new { @class = "text-danger" })
-        </div>
-    </div>
+   
 
     <div class="form-group m-4">
         <div class="col-md-offset-2 col-md-10">

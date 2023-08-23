@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
@@ -9,7 +10,9 @@ namespace LoanApp_SanjaySir.Models
     {
        
         public string DocCode { get; set; }
+
+        [DisplayName("Document")]
         public string DocumentName { get; set; }
-        public byte[] DocumentImage { get; set; }
+        
     }
 }
