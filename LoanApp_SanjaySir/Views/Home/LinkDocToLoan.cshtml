@@ -1,7 +1,107 @@
 ﻿
+
+<h2>The Documents you need are </h2>
+
+
 @{
-    ViewBag.Title = "LinkDocToLoan";
+    ViewBag.Title = "LoanType";
 }
 
-<h2>LinkDocToLoan</h2>
+<h2> Loan Types </h2>
+
+<hr />
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Loan Code</th>
+            <th scope="col">Loan Type</th>
+            <th scope="col">Document Code</th>
+            <th scope="col">Document Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>L01</td>
+            <td>Vehical Loan</td>
+            <td>D01</td>
+            <td>Pan card</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>L01</td>
+            <td>Vehical Loan</td>
+            <td>D02</td>
+            <td>Adhar card</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>L01</td>
+            <td>Vehical Loan</td>
+            <td>D03</td>
+            <td>Electricity bill</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>L01</td>
+            <td>Vehical Loan</td>
+            <td>D04</td>
+            <td>School certificate</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>L01</td>
+            <td>Vehical Loan</td>
+            <td>D05</td>
+            <td>Driving licence</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>L02</td>
+            <td>Personal Loan</td>
+            <td>D01</td>
+            <td>Pan card</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>L02</td>
+            <td>Personal Loan</td>
+            <td>D02</td>
+            <td>Adhar card</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>L02</td>
+            <td>Personal Loan</td>
+            <td>D03</td>
+            <td>Electricity bill</td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>L03</td>
+            <td>Gold Loan</td>
+            <td>D01</td>
+            <td>Pan card</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>L03</td>
+            <td>Gold Loan</td>
+            <td>D02</td>
+            <td>Adhar card</td>
+        </tr>
+
+    </tbody>
+    <script>
+        document.getElementById('nextButton').addEventListener('click', function() {
+            window.location.href = '@Url.Action("LoanApplicationForm", "Home")';
+        });
+    </script>
+
+</table>
+    
+
+
 

@@ -7,6 +7,9 @@ namespace LoanApp_SanjaySir.Models
 {
     public class DocDetails
     {
-        public int DocCode { get; set; }
+       
+        public string DocCode { get; set; }
+        public string DocumentName { get; set; }
+        public byte[] DocumentImage { get; set; }
     }
 }

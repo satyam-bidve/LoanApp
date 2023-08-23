@@ -17,6 +17,7 @@ namespace LoanApp_SanjaySir.Controllers
 
         public void AddCustomerForm(CustomerDetails customer)
         {
+            // Data Recived
             Console.WriteLine(customer.CustomerName);
         }
     }

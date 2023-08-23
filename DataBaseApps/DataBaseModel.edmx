@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LoanAppDataBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CustomerInfo">
+          <Key>
+            <PropertyRef Name="CustCode" />
+          </Key>
+          <Property Name="CustCode" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ApplicationNo" Type="int" Nullable="false" />
+          <Property Name="CustName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ApplicationDate" Type="datetime" />
+          <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
+          <Property Name="Age" Type="smallint" Nullable="false" />
+          <Property Name="CustEmail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CustPhone" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Gender" Type="nchar" MaxLength="10" />
+          <Property Name="LoanCode" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DocumentDetails">
+          <Key>
+            <PropertyRef Name="DocCode" />
+          </Key>
+          <Property Name="DocCode" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="DocName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LoanDetails">
+          <Key>
+            <PropertyRef Name="LoanCode" />
+          </Key>
+          <Property Name="LoanCode" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="LoanType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LoanReq" Type="int" Nullable="false" />
+          <Property Name="LoanSanc" Type="int" Nullable="false" />
+          <Property Name="LoanStatus" Type="bit" Nullable="false" />
+          <Property Name="RateOfInterest" Type="float" Nullable="false" />
+          <Property Name="loanTenure" Type="int" Nullable="false" />
+          <Property Name="LoanEMI" Type="int" Nullable="false" />
+          <Property Name="DocCode" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CustomerInfo_LoanDetails">
+          <End Role="LoanDetails" Type="Self.LoanDetails" Multiplicity="1" />
+          <End Role="CustomerInfo" Type="Self.CustomerInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoanDetails">
+              <PropertyRef Name="LoanCode" />
+            </Principal>
+            <Dependent Role="CustomerInfo">
+              <PropertyRef Name="LoanCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoanDetails_DocumentDetails">
+          <End Role="DocumentDetails" Type="Self.DocumentDetails" Multiplicity="1" />
+          <End Role="LoanDetails" Type="Self.LoanDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocumentDetails">
+              <PropertyRef Name="DocCode" />
+            </Principal>
+            <Dependent Role="LoanDetails">
+              <PropertyRef Name="DocCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LoanAppDataBaseModelStoreContainer">
+          <EntitySet Name="CustomerInfo" EntityType="Self.CustomerInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DocumentDetails" EntityType="Self.DocumentDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoanDetails" EntityType="Self.LoanDetails" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CustomerInfo_LoanDetails" Association="Self.FK_CustomerInfo_LoanDetails">
+            <End Role="LoanDetails" EntitySet="LoanDetails" />
+            <End Role="CustomerInfo" EntitySet="CustomerInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoanDetails_DocumentDetails" Association="Self.FK_LoanDetails_DocumentDetails">
+            <End Role="DocumentDetails" EntitySet="DocumentDetails" />
+            <End Role="LoanDetails" EntitySet="LoanDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LoanAppDataBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CustomerInfo">
+          <Key>
+            <PropertyRef Name="CustCode" />
+          </Key>
+          <Property Name="CustCode" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApplicationNo" Type="Int32" Nullable="false" />
+          <Property Name="CustName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ApplicationDate" Type="DateTime" Precision="3" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Age" Type="Int16" Nullable="false" />
+          <Property Name="CustEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CustPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="LoanCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="LoanDetails" Relationship="Self.FK_CustomerInfo_LoanDetails" FromRole="CustomerInfo" ToRole="LoanDetails" />
+        </EntityType>
+        <EntityType Name="DocumentDetails">
+          <Key>
+            <PropertyRef Name="DocCode" />
+          </Key>
+          <Property Name="DocCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="DocName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="LoanDetails" Relationship="Self.FK_LoanDetails_DocumentDetails" FromRole="DocumentDetails" ToRole="LoanDetails" />
+        </EntityType>
+        <EntityType Name="LoanDetails">
+          <Key>
+            <PropertyRef Name="LoanCode" />
+          </Key>
+          <Property Name="LoanCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="LoanType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LoanReq" Type="Int32" Nullable="false" />
+          <Property Name="LoanSanc" Type="Int32" Nullable="false" />
+          <Property Name="LoanStatus" Type="Boolean" Nullable="false" />
+          <Property Name="RateOfInterest" Type="Double" Nullable="false" />
+          <Property Name="loanTenure" Type="Int32" Nullable="false" />
+          <Property Name="LoanEMI" Type="Int32" Nullable="false" />
+          <Property Name="DocCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="DocumentDetails" Relationship="Self.FK_LoanDetails_DocumentDetails" FromRole="LoanDetails" ToRole="DocumentDetails" />
+        </EntityType>
+        <Association Name="FK_CustomerInfo_LoanDetails">
+          <End Role="LoanDetails" Type="Self.LoanDetails" Multiplicity="1" />
+          <End Role="CustomerInfo" Type="Self.CustomerInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoanDetails">
+              <PropertyRef Name="LoanCode" />
+            </Principal>
+            <Dependent Role="CustomerInfo">
+              <PropertyRef Name="LoanCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoanDetails_DocumentDetails">
+          <End Role="DocumentDetails" Type="Self.DocumentDetails" Multiplicity="1" />
+          <End Role="LoanDetails" Type="Self.LoanDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DocumentDetails">
+              <PropertyRef Name="DocCode" />
+            </Principal>
+            <Dependent Role="LoanDetails">
+              <PropertyRef Name="DocCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LoanAppDataBaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CustomerInfo" EntityType="Self.CustomerInfo" />
+          <EntitySet Name="DocumentDetails" EntityType="Self.DocumentDetails" />
+          <EntitySet Name="LoanDetails" EntityType="Self.LoanDetails" />
+          <AssociationSet Name="FK_CustomerInfo_LoanDetails" Association="Self.FK_CustomerInfo_LoanDetails">
+            <End Role="LoanDetails" EntitySet="LoanDetails" />
+            <End Role="CustomerInfo" EntitySet="CustomerInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoanDetails_DocumentDetails" Association="Self.FK_LoanDetails_DocumentDetails">
+            <End Role="DocumentDetails" EntitySet="DocumentDetails" />
+            <End Role="LoanDetails" EntitySet="LoanDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LoanAppDataBaseModelStoreContainer" CdmEntityContainer="LoanAppDataBaseEntities">
+          <EntitySetMapping Name="CustomerInfo">
+            <EntityTypeMapping TypeName="LoanAppDataBaseModel.CustomerInfo">
+              <MappingFragment StoreEntitySet="CustomerInfo">
+                <ScalarProperty Name="CustCode" ColumnName="CustCode" />
+                <ScalarProperty Name="ApplicationNo" ColumnName="ApplicationNo" />
+                <ScalarProperty Name="CustName" ColumnName="CustName" />
+                <ScalarProperty Name="ApplicationDate" ColumnName="ApplicationDate" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="CustEmail" ColumnName="CustEmail" />
+                <ScalarProperty Name="CustPhone" ColumnName="CustPhone" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="LoanCode" ColumnName="LoanCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocumentDetails">
+            <EntityTypeMapping TypeName="LoanAppDataBaseModel.DocumentDetails">
+              <MappingFragment StoreEntitySet="DocumentDetails">
+                <ScalarProperty Name="DocCode" ColumnName="DocCode" />
+                <ScalarProperty Name="DocName" ColumnName="DocName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoanDetails">
+            <EntityTypeMapping TypeName="LoanAppDataBaseModel.LoanDetails">
+              <MappingFragment StoreEntitySet="LoanDetails">
+                <ScalarProperty Name="LoanCode" ColumnName="LoanCode" />
+                <ScalarProperty Name="LoanType" ColumnName="LoanType" />
+                <ScalarProperty Name="LoanReq" ColumnName="LoanReq" />
+                <ScalarProperty Name="LoanSanc" ColumnName="LoanSanc" />
+                <ScalarProperty Name="LoanStatus" ColumnName="LoanStatus" />
+                <ScalarProperty Name="RateOfInterest" ColumnName="RateOfInterest" />
+                <ScalarProperty Name="loanTenure" ColumnName="loanTenure" />
+                <ScalarProperty Name="LoanEMI" ColumnName="LoanEMI" />
+                <ScalarProperty Name="DocCode" ColumnName="DocCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

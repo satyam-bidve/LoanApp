@@ -11,20 +11,40 @@
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
         <div class="container">
             @Html.ActionLink("Loan App", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-           
+
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    
                 </ul>
             </div>
         </div>
     </nav>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-       
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                <!-- Sidebar content goes here -->
+                <div class="position-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item m-3 d-inline-flex focus-ring py-2 px-3 text-decoration-none "><a style="text-decoration: none; color: #000000 " href="/Home/LoanType">Loan Type</a></li>
+                        <li class="nav-item m-3 d-inline-flex focus-ring py-2 px-3 text-decoration-none"><a style="text-decoration: none; color: #000000 " href="/Home/LoanDoclist">Loan Document List</a></li>
+                        <li class="nav-item m-3 d-inline-flex focus-ring py-2 px-3 text-decoration-none "><a style="text-decoration: none; color: #000000 " href="/Home/linkDocToLoan">Link Document to Loan</a></li>
+                        <li class="nav-item m-3 d-inline-flex focus-ring py-2 px-3 text-decoration-none "><a style="text-decoration: none; color: #000000 " href="/Home/LoanApplicationForm">Customer Loan Transaction</a></li>
+                        <li class="nav-item m-3 d-inline-flex focus-ring py-2 px-3 text-decoration-none "><a style="text-decoration: none; color: #000000 " href="/Home/LoanHistory">Customer Loan History</a></li>
+                        <li class="nav-item m-3 d-inline-flex focus-ring py-2 px-3 text-decoration-none "><a style="text-decoration: none; color: #000000 " href="/Home/LogOut">Log Out</a></li>
+                        <!-- Add more menu items as needed -->
+                    </ul>
+                </div>
+            </nav>
+
+            <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                <div class="container body-content">
+                    @RenderBody()
+                    <hr />
+                </div>
+            </main>
+        </div>
     </div>
 
     @Scripts.Render("~/bundles/jquery")

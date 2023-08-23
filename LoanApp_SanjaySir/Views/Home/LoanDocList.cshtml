@@ -3,5 +3,52 @@
     ViewBag.Title = "LoanDocList";
 }
 
-<h2>LoanDocList</h2>
+<h2>Document Master</h2>
+
+<hr />
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Document Code</th>
+            <th scope="col">Document Desciption</th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <th scope="row">D01</th>
+            <td>Pan Card</td>
+
+        </tr>
+        <tr>
+            <th scope="row">D02</th>
+            <td>Adhar Card</td>
+
+        </tr>
+        <tr>
+            <th scope="row">D03</th>
+            <td>Electricity Bill</td>
+
+        </tr>
+        <tr>
+            <th scope="row">D04</th>
+            <td>School Cirtificate</td>
+
+        </tr>
+        <tr>
+            <th scope="row">D05</th>
+            <td>Driving Licence</td>
+
+        </tr>
+    </tbody>
+</table>
+<div class="col-md-offset-2 col-md-10">
+    <button type="button" id="nextButton" class="btn btn-primary">Next</button>
+</div>
+<script>
+        document.getElementById('nextButton').addEventListener('click', function() {
+            window.location.href = '@Url.Action("LinkDocToLoan", "Home")';
+        });
+</script>
 

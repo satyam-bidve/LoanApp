@@ -8,12 +8,14 @@ namespace LoanApp_SanjaySir.Controllers
 {
     public class HomeController : Controller
     {
+        // --------------------------------------------------------- menu page
         public ActionResult Index()
         {
             return View();
         }
 
        
+        //----------------------------------------------------------- loan types Details
 
         public ActionResult LoanType() 
         {
@@ -21,24 +23,39 @@ namespace LoanApp_SanjaySir.Controllers
             return View();
         }
 
-
+        //------------------------------------------------------------- Loan DOC Details 
         public ActionResult LoanDocList()
         {
 
             return View();
         }
 
+        //---------------------------------------------------------------- requrired DOC Details 
         public ActionResult LinkDocToLoan()
         {
 
             return View();
         }
+        // ---------------------------------------------------------- Application loan
+       
 
-        public ActionResult LoanApplication()
+        public ActionResult LoanApplicationForm() // costmer details
         {
 
             return View();
         }
+        public ActionResult LoanAppForm() // loan details
+        {
+            return View();
+        }
+
+        public ActionResult LoanAppFormDocuments()
+        {
+            return View();
+        }
+
+
+        //---------------------------------------------------------------- Loan History
 
         public ActionResult LoanHistory()
         {
@@ -46,6 +63,7 @@ namespace LoanApp_SanjaySir.Controllers
             return View();
         }
 
+        //---------------------------------------------------------------- EXIT
         public ActionResult LogOut()
         {
 

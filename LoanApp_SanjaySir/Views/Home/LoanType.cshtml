@@ -3,5 +3,65 @@
     ViewBag.Title = "LoanType";
 }
 
-<h2>LoanType</h2>
+<h2> Loan Types </h2>
+
+<hr />
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Loan Code</th>
+            <th scope="col">Loan Desciption</th>
+            <th scope="col">Interest Rate</th>
+            <th scope="col">Minimun Loan Amount </th>
+            <th scope="col">Maximun Loan Amount </th>
+            <th scope="col">Minimun Age </th>
+            <th scope="col">Maximun Age</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">L01</th>
+            <td>Vehical Loan</td>
+            <td>8.5 PA</td>
+            <td>75000</td>
+            <td>300000</td>
+
+            <td>18</td>
+            <td>60</td>
+        </tr>
+        <tr>
+            <th scope="row">L02</th>
+            <td>Personal Loan</td>
+            <td>12 PA</td>
+            <td>100000</td>
+            <td>500000</td>
+
+            <td>18</td>
+            <td>70</td>
+        </tr>
+        <tr>
+            <th scope="row">L03</th>
+            <td>Gold Loan</td>
+            <td>14 PA</td>
+            <td>150000</td>
+            <td>1000000</td>
+            <td>18</td>
+            <td>80</td>
+        </tr>
+    </tbody>
+</table>
+
+        
+    <div class="col-md-offset-2 col-md-10">
+        <button type="button" id="nextButton" class="btn btn-primary">Next</button>
+    </div>
+    <script>
+        document.getElementById('nextButton').addEventListener('click', function() {
+            window.location.href = '@Url.Action("LoanDocList", "Home")';
+        });
+    </script>
+         
+
+
+
 
