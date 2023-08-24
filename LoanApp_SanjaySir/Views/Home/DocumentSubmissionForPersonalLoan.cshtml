@@ -1,0 +1,60 @@
+﻿@model LoanApp_SanjaySir.Models.DocDetails
+
+@{
+    ViewBag.Title = "DocumentSubmissionForPersonalLoan";
+}
+
+<h2>Document Submission For Personal Loan</h2>
+
+@using (Html.BeginForm("ApplicationSubmission", "Home", FormMethod.Post)) 
+{
+    @Html.AntiForgeryToken()
+    
+<<div class="form-horizontal">
+
+
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.filePanCard, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.filePanCard, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+            @Html.ValidationMessageFor(model => model.filePanCard, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.fileAdharCard, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.fileAdharCard, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+            @Html.ValidationMessageFor(model => model.fileAdharCard, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.fileElectricity, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.fileElectricity, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+            @Html.ValidationMessageFor(model => model.fileElectricity, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    
+    <hr />
+
+
+
+    <div class="form-group m-4">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-success">Submit Application</button>
+
+        </div>
+    </div>
+
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

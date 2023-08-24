@@ -120,7 +120,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -186,11 +185,14 @@
     <Content Include="Views\Home\LogOut.cshtml" />
     <Content Include="Views\Home\LoanApplicationForm.cshtml" />
     <Content Include="Views\Home\LoanAppForm.cshtml" />
-    <Content Include="Views\Home\LoanAppFormDocuments.cshtml" />
+    <Content Include="Views\Home\DocumentSubmissionForVehicalLoan.cshtml" />
+    <Content Include="Views\Home\DocumentSubmissionForPersonalLoan.cshtml" />
+    <Content Include="Views\Home\DocumentSubmissionForGoldLoan.cshtml" />
+    <Content Include="Views\Home\ApplicationSubmission.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Customer\" />
+    <Folder Include="UploadedFiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

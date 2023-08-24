@@ -7,7 +7,7 @@
 
 <h2>LoanApplicationForm</h2>
 
-@using (Html.BeginForm("GetCustomerForm", "Customer", FormMethod.Post)) 
+@using (Html.BeginForm("LoanAppForm", "Home", FormMethod.Post)) 
 {
     @Html.AntiForgeryToken()
     
@@ -62,16 +62,11 @@
     <div class="form-group m-4">
         <div class="col-md-offset-2 col-md-10">
             <button type="submit" class="btn btn-success">Submit</button>
-            <button type="button" id="nextButton" class="btn btn-primary">Next</button>
+           
         </div>
     </div>
 
-    <script>
-    document.getElementById('nextButton').addEventListener('click', function() {
-        
-        window.location.href = '@Url.Action("LoanAppForm", "Home")';
-    });
-    </script>
+   
 
 </div>
 }

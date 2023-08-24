@@ -1,6 +1,9 @@
-﻿using System;
+﻿using LoanApp_SanjaySir.Models;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.Mvc;
 
@@ -38,21 +41,86 @@ namespace LoanApp_SanjaySir.Controllers
         }
         // ---------------------------------------------------------- Application loan
        
-
+        //CustomerForm 1️⃣
         public ActionResult LoanApplicationForm() // costmer details
         {
 
             return View();
         }
-        public ActionResult LoanAppForm() // loan details
+
+        // on customer form Submit
+        public ActionResult LoanAppForm(CustomerDetails customerData) // loan details
         {
+            // push Customer to dataBase here 
+            return View();// returns view for loan Form
+        }
+
+        // on Loan App Form Submit
+        public ActionResult DocumentSubmission(LoanDetails loan)
+        {
+
+            int MonthlyInterest;
+            if (loan.LoanType.Equals("Vehicle Loan"))
+            {
+                loan.LoanCode = "L01";
+                loan.LoanStatus = true;
+                loan.RateOfInterest = 8.5f;
+                MonthlyInterest = (int)((loan.LoanAmountReq * (loan.RateOfInterest / 100)) / 12);
+                loan.EMI = (loan.LoanAmountReq / loan.LoanTenure) + MonthlyInterest;
+                // Push Data in database here
+                return View("DocumentSubmissionForVehicalLoan");
+
+            }
+            else if (loan.LoanType.Equals("Personal Loan"))
+            {
+                loan.LoanCode = "L02";
+                loan.LoanStatus = true;
+                loan.RateOfInterest = 12f;
+                MonthlyInterest = (int)((loan.LoanAmountReq * (loan.RateOfInterest / 100)) / 12);
+                loan.EMI = (loan.LoanAmountReq / loan.LoanTenure) + MonthlyInterest;
+                // Push Data in database here
+                return View("DocumentSubmissionForPersonalLoan");
+            }
+            else
+            {
+                loan.LoanCode = "L03";
+                loan.LoanStatus = true;
+                loan.RateOfInterest = 14f;
+                MonthlyInterest = (int)((loan.LoanAmountReq * (loan.RateOfInterest / 100)) / 12);
+                loan.EMI = (loan.LoanAmountReq / loan.LoanTenure) + MonthlyInterest;
+                // Push Data in database here
+                return View("DocumentSubmissionForGoldLoan");
+            }
+
+            
+        }
+
+        public ActionResult ApplicationSubmission(HttpPostedFileBase file)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+
+                    if (file != null)
+                    {
+                        string path = Path.Combine(Server.MapPath("~/UploadedFiles"), Path.GetFileName(file.FileName));
+                        file.SaveAs(path);
+
+                    }
+                    ViewBag.FileStatus = "File uploaded successfully.";
+                }
+                catch (Exception)
+                {
+
+                    ViewBag.FileStatus = "Error while file uploading.";
+                }
+
+            }
             return View();
         }
 
-        public ActionResult LoanAppFormDocuments()
-        {
-            return View();
-        }
+      
 
 
         //---------------------------------------------------------------- Loan History
