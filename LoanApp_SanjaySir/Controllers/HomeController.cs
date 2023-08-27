@@ -48,13 +48,16 @@ namespace LoanApp_SanjaySir.Controllers
             return View();
         }
 
-        // on customer form Submit
+
+        [HttpPost]
+        // on customer form Submit 
         public ActionResult LoanAppForm(CustomerDetails customerData) // loan details
         {
             // push Customer to dataBase here 
             return View();// returns view for loan Form
         }
 
+        [HttpPost]
         // on Loan App Form Submit
         public ActionResult DocumentSubmission(LoanDetails loan)
         {
@@ -94,7 +97,7 @@ namespace LoanApp_SanjaySir.Controllers
 
             
         }
-
+        [HttpPost]
         public ActionResult ApplicationSubmission(HttpPostedFileBase file)
         {
             if (ModelState.IsValid)

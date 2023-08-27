@@ -125,6 +125,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CustomerDetails.cs" />
+    <Compile Include="Models\CustSearch.cs" />
     <Compile Include="Models\DocDetails.cs" />
     <Compile Include="Models\LoanDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -181,7 +182,6 @@
     <Content Include="Views\Home\LoanType.cshtml" />
     <Content Include="Views\Home\LoanDocList.cshtml" />
     <Content Include="Views\Home\LinkDocToLoan.cshtml" />
-    <Content Include="Views\Home\LoanHistory.cshtml" />
     <Content Include="Views\Home\LogOut.cshtml" />
     <Content Include="Views\Home\LoanApplicationForm.cshtml" />
     <Content Include="Views\Home\LoanAppForm.cshtml" />
@@ -189,6 +189,7 @@
     <Content Include="Views\Home\DocumentSubmissionForPersonalLoan.cshtml" />
     <Content Include="Views\Home\DocumentSubmissionForGoldLoan.cshtml" />
     <Content Include="Views\Home\ApplicationSubmission.cshtml" />
+    <Content Include="Views\Home\LoanHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
