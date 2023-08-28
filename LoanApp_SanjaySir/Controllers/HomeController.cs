@@ -98,25 +98,26 @@ namespace LoanApp_SanjaySir.Controllers
             
         }
         [HttpPost]
-        public ActionResult ApplicationSubmission(HttpPostedFileBase file)
+        public ActionResult ApplicationSubmission(DocDetails model)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-
-                    if (file != null)
+                    foreach (var file in model.Files)
                     {
-                        string path = Path.Combine(Server.MapPath("~/UploadedFiles"), Path.GetFileName(file.FileName));
-                        file.SaveAs(path);
-
+                        if (file != null && file.ContentLength > 0)
+                        {
+                            string fileName = Path.GetFileName(file.FileName);
+                            string path = Path.Combine(Server.MapPath("~/UploadedFiles"), fileName);
+                            file.SaveAs(path);
+                        }
                     }
-                    ViewBag.FileStatus = "File uploaded successfully.";
+                    ViewBag.FileStatus = "Files uploaded successfully.";
                 }
                 catch (Exception)
                 {
-
-                    ViewBag.FileStatus = "Error while file uploading.";
+                    ViewBag.FileStatus = "Error while uploading files.";
                 }
 
             }
