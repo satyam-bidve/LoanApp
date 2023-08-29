@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using System.Linq;
 using System.Web;
@@ -8,8 +9,9 @@ namespace LoanApp_SanjaySir.Models
 {
     public class CustomerDetails
     {
-        public int Application { get => new Random().Next(1111, 10000); } // Application number random
+        public int Application { get => SetAppNo(); } // Application number random
 
+        [Required(ErrorMessage ="Please Enter Your Name")]
         [DisplayName("Your Full Name")]
         public string CustomerName { get; set; } = string.Empty;
 
@@ -18,11 +20,14 @@ namespace LoanApp_SanjaySir.Models
         [DisplayName("Date of Birth")]
         public DateTime DateOfBirth { get; set; }
 
+        [Range(18,80)]
         public int Age { get => CalculateAge(); }
 
+        [EmailAddress(ErrorMessage = "Provide a valid Email address")]
         [DisplayName("Email")]
         public string CustomerEmail { get; set; }
 
+        [RegularExpression("^\\d{10}$", ErrorMessage = "Enter a valid Mobile no")]
         [DisplayName("Mobile No")]
         public string CustomerPhone { get; set; }
         public string Gender { get; set; }
@@ -35,10 +40,10 @@ namespace LoanApp_SanjaySir.Models
 
         private DateTime GetDate() { return  DateTime.Now; }
 
-        /*private int SetAppNo()
+        private int SetAppNo()
         {
-            return Math.Round(Random(01, 100));
-        }*/
+            return (Convert.ToInt32(new Random().Next(1111, 10000)));
+        }
 
     }
 }

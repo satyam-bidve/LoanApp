@@ -11,6 +11,8 @@ namespace LoanApp_SanjaySir.Controllers
 {
     public class HomeController : Controller
     {
+        CustomerDetails CustomerFinal; // change here as now insrtace is crated to see its contains object value or not
+        int CheckAge ;
         // --------------------------------------------------------- menu page
         public ActionResult Index()
         {
@@ -53,47 +55,99 @@ namespace LoanApp_SanjaySir.Controllers
         // on customer form Submit 
         public ActionResult LoanAppForm(CustomerDetails customerData) // loan details
         {
-            // push Customer to dataBase here 
-            return View();// returns view for loan Form
+            // This is the general validation for Customer details 
+            if(ModelState.IsValid)
+            {
+                //CustomerFinal = customerData; // ⭕⭕⭕⭕⭕⭕  work on this 
+                //CheckAge = customerData.Age;
+                TempData["age"] = customerData.Age;
+                // push Customer to dataBase here 
+                return View();// returns view for loan Form
+            }
+            else
+            {
+                return View("LoanApplicationForm"); // if input is not valid stay on loanAppliation Form (Customer Deatisl)
+            }
+            
+            
         }
 
         [HttpPost]
         // on Loan App Form Submit
         public ActionResult DocumentSubmission(LoanDetails loan)
         {
+            CheckAge = Convert.ToInt32(TempData["age"]);
+            bool? IsAgeOk = null;
+            // This is General validation for Customer Loan details Validation
+           if(ModelState.IsValid)
+            {
+                int MonthlyInterest;
+                if (loan.LoanType.Equals("Vehicle Loan")) // need to check the age as well to meet the reqired sanderd of customer
+                {
+                   if(CheckAge > 60)
+                    {
+                        
+                        ViewBag.msg = "For Vehical Loan Age must be Under 60 Years";
+                        IsAgeOk = true;
+                    }
+                    else {
+                        loan.LoanCode = "L01";
+                        loan.LoanStatus = true;
+                        loan.RateOfInterest = 8.5f;
+                        MonthlyInterest = (int)((loan.LoanAmountReq * (loan.RateOfInterest / 100)) / 12);
+                        loan.EMI = (loan.LoanAmountReq / loan.LoanTenure) + MonthlyInterest;
+                        // Push Data in database here   
+                        return View("DocumentSubmissionForVehicalLoan");
+                     }
+                    
+                    
 
-            int MonthlyInterest;
-            if (loan.LoanType.Equals("Vehicle Loan"))
-            {
-                loan.LoanCode = "L01";
-                loan.LoanStatus = true;
-                loan.RateOfInterest = 8.5f;
-                MonthlyInterest = (int)((loan.LoanAmountReq * (loan.RateOfInterest / 100)) / 12);
-                loan.EMI = (loan.LoanAmountReq / loan.LoanTenure) + MonthlyInterest;
-                // Push Data in database here
-                return View("DocumentSubmissionForVehicalLoan");
+                }
+                else if (loan.LoanType.Equals("Personal Loan"))
+                {
+                    if (CheckAge > 70)
+                    {
+                       
+                        ViewBag.msg = "For Personal Loan Age must be Under 70 Years";
+                        IsAgeOk = true;
+                    }
+                    else
+                    {
+                        loan.LoanCode = "L02";
+                        loan.LoanStatus = true;
+                        loan.RateOfInterest = 12f;
+                        MonthlyInterest = (int)((loan.LoanAmountReq * (loan.RateOfInterest / 100)) / 12);
+                        loan.EMI = (loan.LoanAmountReq / loan.LoanTenure) + MonthlyInterest;
+                        // Push Data in database here
+                        return View("DocumentSubmissionForPersonalLoan");
 
+                    }
+                    
+                }
+                else
+                {
+                    if (CheckAge > 80)
+                    {
+                        ModelState.AddModelError("Age", "For Gold Loan Age must be Under 80 Years");
+                        ViewBag.msg = "For Gold Loan Age must be Under 80 Years";
+                        IsAgeOk = true;
+                    }
+                    else
+                    {
+                        loan.LoanCode = "L03";
+                        loan.LoanStatus = true;
+                        loan.RateOfInterest = 14f;
+                        MonthlyInterest = (int)((loan.LoanAmountReq * (loan.RateOfInterest / 100)) / 12);
+                        loan.EMI = (loan.LoanAmountReq / loan.LoanTenure) + MonthlyInterest;
+                        // Push Data in database here
+                        return View("DocumentSubmissionForGoldLoan");
+
+                    }
+                   
+                }
             }
-            else if (loan.LoanType.Equals("Personal Loan"))
-            {
-                loan.LoanCode = "L02";
-                loan.LoanStatus = true;
-                loan.RateOfInterest = 12f;
-                MonthlyInterest = (int)((loan.LoanAmountReq * (loan.RateOfInterest / 100)) / 12);
-                loan.EMI = (loan.LoanAmountReq / loan.LoanTenure) + MonthlyInterest;
-                // Push Data in database here
-                return View("DocumentSubmissionForPersonalLoan");
-            }
-            else
-            {
-                loan.LoanCode = "L03";
-                loan.LoanStatus = true;
-                loan.RateOfInterest = 14f;
-                MonthlyInterest = (int)((loan.LoanAmountReq * (loan.RateOfInterest / 100)) / 12);
-                loan.EMI = (loan.LoanAmountReq / loan.LoanTenure) + MonthlyInterest;
-                // Push Data in database here
-                return View("DocumentSubmissionForGoldLoan");
-            }
+           ViewBag.IsAgeOk = IsAgeOk;
+            return View("LoanApplicationForm");
 
             
         }
