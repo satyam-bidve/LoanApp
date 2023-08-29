@@ -9,7 +9,11 @@ namespace LoanApp_SanjaySir.Models
 {
     public class CustomerDetails
     {
-        public int Application { get => SetAppNo(); } // Application number random
+        public CustomerDetails()
+        {
+            Application = SetAppNo();
+        }
+        public int Application { get; private set; } // Application number random seeting only ones by constuctor 
 
         [Required(ErrorMessage ="Please Enter Your Name")]
         [DisplayName("Your Full Name")]
