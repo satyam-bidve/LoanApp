@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using System.Linq;
 using System.Web;
+using LoanApp_SanjaySir.DbModels;
 
 namespace LoanApp_SanjaySir.Models
 {
@@ -13,6 +14,9 @@ namespace LoanApp_SanjaySir.Models
         {
             Application = SetAppNo();
         }
+
+        [Key] // Define the primary key
+        public int CustomerId { get; set; }
         public int Application { get; private set; } // Application number random seeting only ones by constuctor 
 
         [Required(ErrorMessage ="Please Enter Your Name")]
@@ -35,6 +39,12 @@ namespace LoanApp_SanjaySir.Models
         [DisplayName("Mobile No")]
         public string CustomerPhone { get; set; }
         public string Gender { get; set; }
+
+        //-----------------
+        //public int LoanID { get; set; }
+
+       // public virtual LoanDetails loan { get; set; }
+        //-----------
 
         private int CalculateAge()
         {

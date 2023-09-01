@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.Mvc;
+using LoanApp_SanjaySir.DBContext;
 
 namespace LoanApp_SanjaySir.Controllers
 {
@@ -13,6 +14,7 @@ namespace LoanApp_SanjaySir.Controllers
     {
         CustomerDetails CustomerFinal; // change here as now insrtace is crated to see its contains object value or not
         int CheckAge ;
+        DataContext dbContext;
         // --------------------------------------------------------- menu page
         public ActionResult Index()
         {
@@ -55,13 +57,20 @@ namespace LoanApp_SanjaySir.Controllers
         // on customer form Submit 
         public ActionResult LoanAppForm(CustomerDetails customerData) // loan details
         {
+
+            // setting up databse code ConnString here 
+            DataContext dbContext= new DataContext("Data Source = DESKTOP-BV0OTOG\\SQLEXPRESS ; Initial Catalog =LoanAppDataBase ; Integrated Security = true ; multipleactiveresultsets = true ; timeout = 1000; Connection Timeout = 1000;");
+
             // This is the general validation for Customer details 
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 //CustomerFinal = customerData; // ⭕⭕⭕⭕⭕⭕  work on this 
                 //CheckAge = customerData.Age;
                 TempData["age"] = customerData.Age;
+               // customerData.LoanID += 1;
                 // push Customer to dataBase here 
+                dbContext.Constomers.Add(customerData);
+                dbContext.SaveChanges();
                 return View();// returns view for loan Form
             }
             else
@@ -76,6 +85,10 @@ namespace LoanApp_SanjaySir.Controllers
         // on Loan App Form Submit
         public ActionResult DocumentSubmission(LoanDetails loan)
         {
+
+            // setting up databse code ConnString here 
+            DataContext dbContext= new DataContext("Data Source = DESKTOP-BV0OTOG\\SQLEXPRESS ; Initial Catalog =LoanAppDataBase ; Integrated Security = true ; multipleactiveresultsets = true ; timeout = 1000; Connection Timeout = 1000;");
+
             CheckAge = Convert.ToInt32(TempData["age"]);
             bool? IsAgeOk = null;
             // This is General validation for Customer Loan details Validation
@@ -97,6 +110,8 @@ namespace LoanApp_SanjaySir.Controllers
                         MonthlyInterest = (int)((loan.LoanAmountReq * (loan.RateOfInterest / 100)) / 12);
                         loan.EMI = (loan.LoanAmountReq / loan.LoanTenure) + MonthlyInterest;
                         // Push Data in database here   
+                        dbContext.Loans.Add(loan);
+                        dbContext.SaveChanges();
                         return View("DocumentSubmissionForVehicalLoan");
                      }
                     
@@ -119,6 +134,8 @@ namespace LoanApp_SanjaySir.Controllers
                         MonthlyInterest = (int)((loan.LoanAmountReq * (loan.RateOfInterest / 100)) / 12);
                         loan.EMI = (loan.LoanAmountReq / loan.LoanTenure) + MonthlyInterest;
                         // Push Data in database here
+                        dbContext.Loans.Add(loan);
+                        dbContext.SaveChanges();
                         return View("DocumentSubmissionForPersonalLoan");
 
                     }
@@ -140,13 +157,20 @@ namespace LoanApp_SanjaySir.Controllers
                         MonthlyInterest = (int)((loan.LoanAmountReq * (loan.RateOfInterest / 100)) / 12);
                         loan.EMI = (loan.LoanAmountReq / loan.LoanTenure) + MonthlyInterest;
                         // Push Data in database here
+                        dbContext.Loans.Add(loan);
+                        dbContext.SaveChanges();
                         return View("DocumentSubmissionForGoldLoan");
 
                     }
                    
                 }
             }
-           ViewBag.IsAgeOk = IsAgeOk;
+            /*if (ModelState.IsValid)
+            {
+                //_dbContext.Table Name.Add(loan);
+                //_dbContext.saveChanges();
+            }*/
+            ViewBag.IsAgeOk = IsAgeOk;
             return View("LoanApplicationForm");
 
             
@@ -184,6 +208,12 @@ namespace LoanApp_SanjaySir.Controllers
         //---------------------------------------------------------------- Loan History
 
         public ActionResult LoanHistory()
+        {
+
+            return View();
+        }
+
+        public ActionResult ShowCustDetails(CustSearch searchID)
         {
 
             return View();
