@@ -1,27 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
 namespace LoanApp_SanjaySir.Models
 {
-    public class LoanDetails
+    public class MasterData
     {
-        [Key] // Define the primary key
-        public int Id { get; set; }
+        public int Application { get;  set; } 
+
+       
+        public string CustomerName { get; set; } = string.Empty;
+
+        public DateTime ApplicationDate { get; set; }
+
+        
+        public DateTime DateOfBirth { get; set; }
+
+        
+        public int Age { get; set; }
+
+        
         public string CustomerEmail { get; set; }
+
+       
+        public string CustomerPhone { get; set; }
+        public string Gender { get; set; }
 
         public String LoanCode { get; set; }
 
-        [DisplayName("Loan Type :")]
         public string LoanType { get; set; }
 
-        [DisplayName("Loan Amount Required :")]
+        
         public int LoanAmountReq { get; set; }
 
-        
+
 
         public bool LoanStatus { get; set; }
 
@@ -29,7 +44,5 @@ namespace LoanApp_SanjaySir.Models
         public int LoanTenure { get; set; }
 
         public int EMI { get; set; }
-       
-
     }
 }

@@ -138,6 +138,7 @@
     <Compile Include="Models\CustSearch.cs" />
     <Compile Include="Models\DocDetails.cs" />
     <Compile Include="Models\LoanDetails.cs" />
+    <Compile Include="Models\MasterData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -200,6 +201,7 @@
     <Content Include="Views\Home\DocumentSubmissionForGoldLoan.cshtml" />
     <Content Include="Views\Home\ApplicationSubmission.cshtml" />
     <Content Include="Views\Home\LoanHistory.cshtml" />
+    <Content Include="Views\Home\ShowCustDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

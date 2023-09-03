@@ -14,7 +14,8 @@ namespace LoanApp_SanjaySir.Controllers
     {
         CustomerDetails CustomerFinal; // change here as now insrtace is crated to see its contains object value or not
         int CheckAge ;
-        DataContext dbContext;
+        string matchMail;
+        //DataContext dbContext;
         // --------------------------------------------------------- menu page
         public ActionResult Index()
         {
@@ -64,9 +65,10 @@ namespace LoanApp_SanjaySir.Controllers
             // This is the general validation for Customer details 
             if (ModelState.IsValid)
             {
-                //CustomerFinal = customerData; // ⭕⭕⭕⭕⭕⭕  work on this 
-                //CheckAge = customerData.Age;
+               customerData.Age = (int)Math.Round((DateTime.Now - customerData.DateOfBirth).TotalDays / 365.0);
+                customerData.ApplicationDate = DateTime.Now;
                 TempData["age"] = customerData.Age;
+                TempData["mail"] = customerData.CustomerEmail;
                // customerData.LoanID += 1;
                 // push Customer to dataBase here 
                 dbContext.Constomers.Add(customerData);
@@ -91,8 +93,9 @@ namespace LoanApp_SanjaySir.Controllers
 
             CheckAge = Convert.ToInt32(TempData["age"]);
             bool? IsAgeOk = null;
+            matchMail = (string)TempData["mail"];
             // This is General validation for Customer Loan details Validation
-           if(ModelState.IsValid)
+           if (ModelState.IsValid)
             {
                 int MonthlyInterest;
                 if (loan.LoanType.Equals("Vehicle Loan")) // need to check the age as well to meet the reqired sanderd of customer
@@ -105,6 +108,7 @@ namespace LoanApp_SanjaySir.Controllers
                     }
                     else {
                         loan.LoanCode = "L01";
+                        loan.CustomerEmail = matchMail;
                         loan.LoanStatus = true;
                         loan.RateOfInterest = 8.5f;
                         MonthlyInterest = (int)((loan.LoanAmountReq * (loan.RateOfInterest / 100)) / 12);
@@ -129,6 +133,7 @@ namespace LoanApp_SanjaySir.Controllers
                     else
                     {
                         loan.LoanCode = "L02";
+                        loan.CustomerEmail = matchMail;
                         loan.LoanStatus = true;
                         loan.RateOfInterest = 12f;
                         MonthlyInterest = (int)((loan.LoanAmountReq * (loan.RateOfInterest / 100)) / 12);
@@ -152,6 +157,7 @@ namespace LoanApp_SanjaySir.Controllers
                     else
                     {
                         loan.LoanCode = "L03";
+                        loan.CustomerEmail = matchMail;
                         loan.LoanStatus = true;
                         loan.RateOfInterest = 14f;
                         MonthlyInterest = (int)((loan.LoanAmountReq * (loan.RateOfInterest / 100)) / 12);
@@ -174,7 +180,7 @@ namespace LoanApp_SanjaySir.Controllers
             return View("LoanApplicationForm");
 
             
-        }
+        }   
         [HttpPost]
         public ActionResult ApplicationSubmission(DocDetails model)
         {
@@ -209,14 +215,60 @@ namespace LoanApp_SanjaySir.Controllers
 
         public ActionResult LoanHistory()
         {
+            DataContext dbContext = new DataContext("Data Source = DESKTOP-BV0OTOG\\SQLEXPRESS ; Initial Catalog =LoanAppDataBase ; Integrated Security = true ; multipleactiveresultsets = true ; timeout = 1000; Connection Timeout = 1000;");
+
+            var customerRecords = dbContext.Constomers.ToList();
+            var LoanRecords = dbContext.Loans.ToList();
+
+            ViewBag.CustomerRecords = customerRecords;
+            ViewBag.Loans = LoanRecords;
 
             return View();
         }
 
         public ActionResult ShowCustDetails(CustSearch searchID)
         {
+            
+            DataContext dbContext = new DataContext("Data Source = DESKTOP-BV0OTOG\\SQLEXPRESS ; Initial Catalog =LoanAppDataBase ; Integrated Security = true ; multipleactiveresultsets = true ; timeout = 1000; Connection Timeout = 1000;");
 
-            return View();
+            var customerRecords = dbContext.Constomers.ToList();
+            var LoanRecords = dbContext.Loans.ToList();
+            // we can pass these lists by viewbag to view directly and then loop through it to print all data (Show All Cust Details)
+            MasterData master = new MasterData();
+            // here we found the objects (record from databse ) in list - loop through it and match with our serachID Email 
+            foreach(var record in customerRecords)
+            {
+                if (record.CustomerEmail.Equals(searchID.CustEmail)) 
+                {
+
+                    // create new model that will hold all data for customer as well as loan assigne the record value to it 
+                    master.Application = record.Application;
+                    master.CustomerName = record.CustomerName;
+                    master.CustomerEmail = record.CustomerEmail;
+                    master.ApplicationDate = record.ApplicationDate;
+                    master.DateOfBirth = record.DateOfBirth;
+                    master.Age= record.Age;
+                    master.CustomerPhone = record.CustomerPhone;
+                    master.Gender= record.Gender;
+                }
+            }
+            foreach (var record in LoanRecords)
+            {
+                if (record.CustomerEmail.Equals(searchID.CustEmail))
+                {
+
+                    // create new model that will hold all data for customer as well as loan assigne the record value to it 
+                    master.LoanCode= record.LoanCode;
+                    master.LoanType= record.LoanType;
+                    master.LoanAmountReq= record.LoanAmountReq;
+                    master.LoanStatus= record.LoanStatus;
+                    master.RateOfInterest= record.RateOfInterest;
+                    master.LoanTenure= record.LoanTenure;
+                    master.EMI= record.EMI;
+                }
+            }
+            
+            return View(master);
         }
 
         //---------------------------------------------------------------- EXIT

@@ -1,0 +1,42 @@
+﻿@model LoanApp_SanjaySir.Models.MasterData
+@{
+    ViewBag.Title = "ShowCustDetails";
+}
+
+<h2>Search reasult - </h2>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            
+            <th scope="col"> Name</th>
+            <th scope="col"> Email ID </th>
+            <th scope="col">Loan Type </th>
+            <th scope="col">Loan Amount </th>
+            <th scope="col">Loan Status </th>
+            <th scope="col">Loan Tenure</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+
+            <td>@Model.CustomerName</td>
+            <td>@Model.CustomerEmail</td>
+            <td>@Model.LoanType</td>
+            <td>@Model.LoanAmountReq</td>
+            @{
+                if (Model.LoanStatus)
+                {
+                    <td>Approved</td>
+                }
+                else
+                {
+                    <td>Rejected</td>
+                }
+            }
+
+            <td>@Model.LoanTenure</td>
+        </tr>
+        
+    </tbody>
+</table>
+
