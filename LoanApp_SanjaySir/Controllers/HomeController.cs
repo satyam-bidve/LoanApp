@@ -44,12 +44,12 @@ namespace LoanApp_SanjaySir.Controllers
 
             return View();
         }
-        // ---------------------------------------------------------- Application loan
+        // ---------------------------------------------------------- Application loan transaction 
        
         //CustomerForm 1️⃣
         public ActionResult LoanApplicationForm() // costmer details
         {
-
+            // display form
             return View();
         }
 
@@ -184,8 +184,7 @@ namespace LoanApp_SanjaySir.Controllers
         [HttpPost]
         public ActionResult ApplicationSubmission(DocDetails model)
         {
-            if (ModelState.IsValid)
-            {
+           
                 try
                 {
                     foreach (var file in model.Files)
@@ -204,7 +203,7 @@ namespace LoanApp_SanjaySir.Controllers
                     ViewBag.FileStatus = "Error while uploading files.";
                 }
 
-            }
+            
             return View();
         }
 

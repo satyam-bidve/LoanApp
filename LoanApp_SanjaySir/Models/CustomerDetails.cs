@@ -25,6 +25,7 @@ namespace LoanApp_SanjaySir.Models
         public DateTime ApplicationDate { get; set; }
 
         [DisplayName("Date of Birth")]
+        [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
 
         
