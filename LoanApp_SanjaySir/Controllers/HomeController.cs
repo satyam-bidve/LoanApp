@@ -14,7 +14,53 @@ namespace LoanApp_SanjaySir.Controllers
     {
         CustomerDetails CustomerFinal; // change here as now insrtace is crated to see its contains object value or not
         int CheckAge ;
+        bool loginFlag;
         string matchMail;
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        public ActionResult LoginCheck([Bind(Include = "CustomerEmail,Password")] RegisterCustomer register)
+        {
+            // get data from register table check credential here if ok redirect to index <- menu
+            DataContext dbContext = new DataContext("Data Source = DESKTOP-BV0OTOG\\SQLEXPRESS ; Initial Catalog =LoanAppDataBase ; Integrated Security = true ; multipleactiveresultsets = true ; timeout = 1000; Connection Timeout = 1000;");
+            var checkLog = dbContext.CustomersLog.ToList();
+            foreach(var checks in checkLog)
+            {
+                if (checks.CustomerEmail.Equals(register.CustomerEmail) && checks.Password.Equals(register.Password))
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+               
+            }
+            ViewBag.msg = " please Check Your credentials ";
+            loginFlag = true;
+            ViewBag.loginFlag = loginFlag;
+            ModelState.Clear();
+            return View("Login");
+
+
+        }
+
+        public ActionResult Register()
+        {
+             
+
+            return View();
+        }
+        public ActionResult Registration(RegisterCustomer register)
+        {
+            // Register data in database .. redirect to login page 
+            
+                DataContext dbContext = new DataContext("Data Source = DESKTOP-BV0OTOG\\SQLEXPRESS ; Initial Catalog =LoanAppDataBase ; Integrated Security = true ; multipleactiveresultsets = true ; timeout = 1000; Connection Timeout = 1000;");
+                dbContext.CustomersLog.Add(register);
+                dbContext.SaveChanges();
+
+                return RedirectToAction("Login", "Home");
+            
+            
+        }
         //DataContext dbContext;
         // --------------------------------------------------------- menu page
         public ActionResult Index()
@@ -274,7 +320,7 @@ namespace LoanApp_SanjaySir.Controllers
         public ActionResult LogOut()
         {
 
-            return View();
+            return RedirectToAction("Login", "Home");
         }
     }
 }

@@ -139,6 +139,7 @@
     <Compile Include="Models\DocDetails.cs" />
     <Compile Include="Models\LoanDetails.cs" />
     <Compile Include="Models\MasterData.cs" />
+    <Compile Include="Models\RegisterCustomer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -193,7 +194,6 @@
     <Content Include="Views\Home\LoanType.cshtml" />
     <Content Include="Views\Home\LoanDocList.cshtml" />
     <Content Include="Views\Home\LinkDocToLoan.cshtml" />
-    <Content Include="Views\Home\LogOut.cshtml" />
     <Content Include="Views\Home\LoanApplicationForm.cshtml" />
     <Content Include="Views\Home\LoanAppForm.cshtml" />
     <Content Include="Views\Home\DocumentSubmissionForVehicalLoan.cshtml" />
@@ -202,6 +202,8 @@
     <Content Include="Views\Home\ApplicationSubmission.cshtml" />
     <Content Include="Views\Home\LoanHistory.cshtml" />
     <Content Include="Views\Home\ShowCustDetails.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -21,5 +21,7 @@ namespace LoanApp_SanjaySir.DBContext
 
         public virtual DbSet<LoanDetails> Loans { get; set; }
 
+        public virtual DbSet<RegisterCustomer> CustomersLog { get; set; }
+
     }
 }
