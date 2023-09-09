@@ -4,7 +4,7 @@ using System.Data.Entity;
 using System.Diagnostics.PerformanceData;
 using System.Linq;
 using System.Web;
-using LoanApp_SanjaySir.DbModels;
+
 using LoanApp_SanjaySir.Models;
 
 namespace LoanApp_SanjaySir.DBContext

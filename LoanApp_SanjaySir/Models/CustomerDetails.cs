@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using System.Linq;
 using System.Web;
-using LoanApp_SanjaySir.DbModels;
+
 
 namespace LoanApp_SanjaySir.Models
 {

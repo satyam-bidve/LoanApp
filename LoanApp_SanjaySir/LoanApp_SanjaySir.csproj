@@ -129,8 +129,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DBContext\DataContext.cs" />
-    <Compile Include="DbModels\Constomer.cs" />
-    <Compile Include="DbModels\Loan.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
